@@ -4,11 +4,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 @Controller
-public class PrivateController {
+public class HomeController {
     
-    @GetMapping("/private")
-    public ResponseEntity<String> getGreeting() {
-        return ResponseEntity.ok("Private content");
+    @GetMapping("/home")
+    public ResponseEntity<String> getHome() {
+        return ResponseEntity.ok("helooooooooo home");
     } 
 }
