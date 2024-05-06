@@ -40,6 +40,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/private").hasRole("ADMIN")
                 .requestMatchers("/public").permitAll()
                 .requestMatchers("/home").permitAll()
+                .requestMatchers("").permitAll()
     	    .and().formLogin()
 	    .and().build();
     }

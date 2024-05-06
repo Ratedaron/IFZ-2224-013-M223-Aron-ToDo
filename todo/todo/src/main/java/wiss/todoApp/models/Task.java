@@ -6,15 +6,16 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-
-
-
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
-     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    // Die Annotation @GeneratedValue(strategy=GenerationType.IDENTITY) wird verwendet, um die automatische Generierung von Primärschlüsselwerten in einer Datenbanktabelle anzugeben. In diesem Fall wird die Strategie GenerationType.IDENTITY verwendet, um zu signalisieren, dass die Datenbank selbst die Generierung der Primärschlüsselwerte übernehmen soll.
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Die Annotation @GeneratedValue(strategy=GenerationType.IDENTITY) wird
+    // verwendet, um die automatische Generierung von Primärschlüsselwerten in einer
+    // Datenbanktabelle anzugeben. In diesem Fall wird die Strategie
+    // GenerationType.IDENTITY verwendet, um zu signalisieren, dass die Datenbank
+    // selbst die Generierung der Primärschlüsselwerte übernehmen soll.
     // Models
     private Integer taskid;
 
