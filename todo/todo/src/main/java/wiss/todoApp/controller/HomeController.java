@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import wiss.todoApp.exception.ResourceNotFoundException;
 import wiss.todoApp.models.Task;
 import wiss.todoApp.repository.TaskRepository;
 import wiss.todoApp.security.services.TaskService;
@@ -49,5 +52,13 @@ public class HomeController {
         taskService.deleteTask(id);
         return ResponseEntity.ok("Task " + id + " deleted");
         // if not exists pleses make a diffrent massage appear
+    }
+
+    // build update employee REST API
+    @PutMapping("/uptTask/{id}")
+    public ResponseEntity<String> updateTask(@PathVariable int id,
+            @RequestBody Task task) {
+        taskService.updateTask(id, task);
+        return ResponseEntity.ok("task " + id + " has been updated");
     }
 }
