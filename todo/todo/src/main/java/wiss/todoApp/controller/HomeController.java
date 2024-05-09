@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +28,12 @@ public class HomeController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/home")
-    public ResponseEntity<String> getHome() {
-        return ResponseEntity.ok("helooooooooo home");
+    @GetMapping("/getTasks")
+    public ResponseEntity<List<Task>> getAllTasks() {
+        Iterable<Task> taskItems = taskRepository.findAll();
+        List<Task> tasks = new ArrayList<>();
+        taskItems.forEach(tasks::add);
+        return ResponseEntity.ok(tasks);
     }
 
     @PostMapping("/addTask") // Map ONLY POST Requests

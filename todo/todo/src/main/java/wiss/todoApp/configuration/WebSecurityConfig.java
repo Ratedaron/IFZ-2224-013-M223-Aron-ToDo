@@ -65,6 +65,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
               .requestMatchers("/home").permitAll()
               .requestMatchers("/delTask/*").permitAll()
               .requestMatchers("/uptTask/*").permitAll()
+              .requestMatchers("/getTasks").permitAll()
               .anyRequest().authenticated()
         );
     
