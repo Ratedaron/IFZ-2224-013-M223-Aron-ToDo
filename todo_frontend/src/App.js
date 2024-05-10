@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import React from 'react';
+import RobloxScreenShot20240408_111852622 from './RobloxScreenShot20240408_111852622.png';
+import kilo from './Kilo.png';
 import './App.css';
 
-function App() {
+function MyButton() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          go wild!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button>I am a button</button>
   );
 }
 
-export default App;
+function AbtPage() {
+  return (
+    <>
+      <h1>About page</h1>
+      <p>Hello, how are you?<br />HHHHHHHHHHHHHHHHHHHHH</p>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <h1>Start with a button</h1>
+      <MyButton />
+      <AbtPage />
+      <div className='overAllCenter'>
+        <div className='polaroid'>
+
+
+          <img src={RobloxScreenShot20240408_111852622} alt="lolyimage" style={{ width: '100%', display: 'block' }} />
+          <div className='container'>
+            <p>This is a Roblox image</p>
+          </div>
+        </div>
+
+
+        <div className='polaroid'>
+          <img src={kilo} alt='kiloren image' style={{ width: '100%', display: 'block' }} />
+          <div className='container'>
+            <p>This is a kilo image</p>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  );
+}
