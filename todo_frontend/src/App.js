@@ -43,21 +43,80 @@ function AbtPage() {
 const content = '1';
 const randomNumber = Math.ceil(Math.random() * 2);
 
+function ButtonAlertForButton2() {
+  const [count, setCount] = useState(0);
+  function HandleClick() {
+    setCount(count + 1);
+    alert('button pressed ' + count + ' times');
+  }
+  return (<button id='button1' onClick={HandleClick}>
+    helloo
+  </button>
+  );
+}
+
+function ButtonAlert() {
+  const [count, setCount] = useState(0);
+  function HandleClick() {
+    setCount(count + 1);
+    alert('button pressed ' + count + ' times');
+  }
+  return (<button id='button1' onClick={HandleClick}>
+    helloo
+  </button>
+  );
+}
+function UseStateButton({ count, onClick }) {
+  return (
+    <button id='button1' onClick={onClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+
+
 export default function App() {
-  // Define useState hook
+
   const [count, setCount] = useState(0);
 
-  // Define HandleClick function
-  function HandleClick() {
-    // Update the count
+  function handleClick() {
     setCount(count + 1);
-    // Show an alert with the current count
-    alert('You clicked me ' + count + ' times');
   }
+
+  function Square() {
+    const [value, setValue] = useState(null);
+
+    function HandleClick() {
+      setValue('X');
+    }
+    return <button className='square' onClick={HandleClick} >{value} </button>;
+  }
+
 
 
   return (
     <div className='margin'>
+
+<div className="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div className="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div className="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+
+
+
+
+
       {randomNumber === 2 && (
         <>
           <h1>Start with a button</h1>
@@ -82,9 +141,19 @@ export default function App() {
         </>
       )}
       {/* Call HandleClick function when button is clicked */}
-      <button id='button1' onClick={HandleClick}>
+      { /*<button id='button1' onClick={HandleClick}>
         Button
       </button>
+      <button id='button1' onClick={HandleClick}>
+        me 2nd button
+      </button> */}
+
+
+
+      <UseStateButton count={count} onClick={handleClick} />
+      <UseStateButton count={count} onClick={handleClick} />
+      <ButtonAlert />
+      <ButtonAlertForButton2 />
       <ul>
         {products.map(product => (
           <li className='fruits' key={product.id} style={{ color: product.isFruit ? 'blue' : 'chocolate' }}>
@@ -95,3 +164,4 @@ export default function App() {
     </div>
   );
 }
+
