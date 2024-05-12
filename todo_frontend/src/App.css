@@ -69,4 +69,57 @@ div.container {
   content: '';
   display: table;
 }
+.buttonList{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding: 2%;
+  padding-left: 20%;
+  padding-right: 20%;
+  border-radius: 200px;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+  unicode-bidi: isolate;
+}
+.wholeList{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border: 10px solid black;
+border-radius: 20px;  
+}
+
+#todoh1{
+  flex:1;
+  text-align: center;
+}
+#container{
+  display: flex;
+  
+}
+#addButton{
+  position: absolute; /* Set button to absolute positioning */
+  top: 0; /* Align button to the top */
+  left: 0; /* Align button to the left */
+  margin: 92.11px;  
+  background: lime;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
 

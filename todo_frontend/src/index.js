@@ -1,13 +1,36 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import About from './pages/About';
 import reportWebVitals from './reportWebVitals';
+import Layout from './pages/Layout';
+import MyTesting from './pages/MyTesting';
+
+
+export default function App2() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+         {/*<Route index element={<App />} />*/}
+          <Route path='tasks' element={<App />} />
+          <Route path="about" element={<About />} />
+          <Route path="myTesting" element={<MyTesting />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App2 />
   </React.StrictMode>
 );
 
