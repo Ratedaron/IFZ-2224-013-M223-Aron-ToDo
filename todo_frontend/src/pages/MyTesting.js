@@ -90,7 +90,7 @@ export /*default*/ function MyTesting() {
     function HandleClick() {
       setValue('X');
     }
-    return <button className='square' onClick={HandleClick} >{value} </button>;
+    return <button className='squareForTikTakToe' onClick={HandleClick} >{value} </button>;
   }
 
   const [buttonCount, setButtonCount] = useState(0);
@@ -152,7 +152,7 @@ export /*default*/ function MyTesting() {
   };
 
     return (
-      <div className='margin'>
+      <div className='marginForMyTesting'>
 
 <button className="button red" style={redButtonStyle}>Top Button</button>
       <button className="button white" style={whiteButtonStyle}>Middle Button</button>
