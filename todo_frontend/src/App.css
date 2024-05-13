@@ -5,6 +5,28 @@
   padding: 0px;
 
 }
+.button {
+  position: absolute;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  z-index: 1; /* Ensure buttons appear above each other */
+}
+
+.button:hover {background-color: #3e8e41;}
+
+.red {background-color: #f44336; z-index: 3;} /* Increase z-index to place above other buttons */
+.white {background-color: #f1f1f1; z-index: 2;} /* Adjust z-index to stack between other buttons */
+
+
 .margin{
   margin: 20px;
 }
@@ -69,7 +91,7 @@ div.container {
   content: '';
   display: table;
 }
-.buttonList{
+.todobutton{
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -77,6 +99,9 @@ div.container {
   padding-left: 20%;
   padding-right: 20%;
   border-radius: 200px;
+}
+.buttonList{
+  display: flex;
 }
 
 ul {

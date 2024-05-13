@@ -1,9 +1,10 @@
 package wiss.todoApp;
 
 import java.util.ArrayList;
-
+import wiss.todoApp.configuration.CorsConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController // new item
 @SpringBootApplication
+@Import(CorsConfig.class)
 public class TodoApplication {
 
 	public ArrayList<String> tasks = new ArrayList<>(); // new item

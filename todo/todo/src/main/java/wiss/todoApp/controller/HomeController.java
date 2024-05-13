@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import wiss.todoApp.exception.ResourceNotFoundException;
+//import wiss.todoApp.exception.ResourceNotFoundException;
 import wiss.todoApp.models.Task;
 import wiss.todoApp.repository.TaskRepository;
 import wiss.todoApp.security.services.TaskService;
@@ -37,15 +37,17 @@ public class HomeController {
     }
 
     @PostMapping("/addTask") // Map ONLY POST Requests
-    public ResponseEntity<List<String>> addNewTask(@RequestParam String taskName) {
+    public ResponseEntity<List<String>> addNewTask(@RequestParam String taskName, String taskDescription) {
 
         Task task1 = new Task();
         task1.setTaskName(taskName);
+        task1.setTaskDescription(taskDescription);
         taskRepository.save(task1); // defined in CrudRepository-Interface
 
         ArrayList<String> msg = new ArrayList<>();
         msg.add(Integer.toString(task1.getTaskid()));
         msg.add(task1.getTaskName());
+        msg.add(task1.getTaskDescription());
 
         return ResponseEntity.ok(msg);
     }
