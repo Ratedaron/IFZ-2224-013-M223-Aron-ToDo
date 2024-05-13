@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 export /*default*/ function App() {
 
-  const [buttonCount, setButtonCount] = useState(0);
+  useEffect(() => {
+    fetchTasks();
+  }, []); // This empty dependency array ensures the effect runs only once when the component mounts
+
+  function fetchTasks() {
+    fetch('http://localhost:8080/getTasks')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('failed to fetch tasks');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setTasks(data);
+      })
+      .catch(error => {
+        console.error('Fetch error: ', error);
+      })
+  }
+
+
   const [tasks, setTasks] = useState([]);
 
   function addTask() {
     const taskDescription = prompt('Enter a Task description for task ' + (tasks.length + 1));
     if (taskDescription !== null && taskDescription !== '') {
-      const updatedTasks = [...tasks, { id: tasks.length + 1, name: 'Task ' + (tasks.length + 1), taskDescription }];
+      const updatedTasks = [...tasks, { taskid: tasks.length + 1, taskName: 'placeholder', taskDescription: taskDescription }];
       setTasks(updatedTasks);
     }
   }
@@ -41,11 +61,11 @@ export /*default*/ function App() {
         {tasks.map((task, index) => (
           <div className='inLine'>
             <ul>
-              <div key={task.id} className="task-item">
+              <div key={task.taskid} className="task-item">
                 <button onClick={() => deleteTask(index)}>Delete</button>
                 <button onClick={() => editTask(index)}>Edit</button>
 
-                <button className='buttonList'><strong>{task.name} | TODO: {task.taskDescription} </strong></button>
+                <button className='buttonList'><strong>{task.taskid} | TODO: {task.taskDescription} </strong></button>
 
               </div>
             </ul>

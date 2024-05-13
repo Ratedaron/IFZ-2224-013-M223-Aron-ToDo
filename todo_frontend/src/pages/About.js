@@ -1,8 +1,10 @@
+import "./Layout.css";
 function About() {
     return (
-        <div>
+        <div className="margin">
             <h1>About Section of my ToDo App</h1>
             <p>place holder</p>
+            <p>by the way, REACT kinda lit</p>
         </div>
     );
 }

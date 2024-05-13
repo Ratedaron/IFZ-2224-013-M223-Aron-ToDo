@@ -7,6 +7,7 @@ import About from './pages/About';
 import reportWebVitals from './reportWebVitals';
 import Layout from './pages/Layout';
 import MyTesting from './pages/MyTesting';
+import Home from './pages/Home';
 
 
 export default function App2() {
@@ -14,7 +15,7 @@ export default function App2() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-         {/*<Route index element={<App />} />*/}
+         <Route index element={<Home />} />
           <Route path='tasks' element={<App />} />
           <Route path="about" element={<About />} />
           <Route path="myTesting" element={<MyTesting />} />
