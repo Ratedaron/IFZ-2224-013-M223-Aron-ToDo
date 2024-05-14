@@ -6,29 +6,28 @@ function LoginPage() {
   // State variables to store the username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState(true);
 
   const navigate = useNavigate()
 
-  useEffect(() => {
+  /*useEffect(() => {
     // Check if user is already logged in
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('user');
     if (token) {
       setisLoggedIn(true);
       navigate.push('/'); // Redirect to home page if logged in
       console.log(isLoggedIn);
+      localStorage.removeItem('status');
     }
   }, [navigate, isLoggedIn]);
+*/
 
   // State variable to store user data
   const [userData, setUserData] = useState({
     username: '',
     password: ''
   });
-
-  if (isLoggedIn === false) {
-    return <p>Logged in</p>; // Return null if logged in to prevent rendering the login form
-  }
+  
 
   // Function to handle username input change
   const handleUsernameChange = (event) => {
@@ -53,6 +52,8 @@ function LoginPage() {
       if (response.data.username) {
         localStorage.setItem("user", JSON.stringify(response.data));
         alert('logged in!');
+        localStorage.removeItem('status');
+        localStorage.setItem('status', 'isLoggedIn' );
       } else {
         console.error('Login failed:', response.data);
       }
@@ -66,29 +67,42 @@ function LoginPage() {
     setPassword('');
   };
 
+  // Check if user is logged in based on localStorage status
+  if (localStorage.getItem('status') === 'isLoggedIn') {
+    return (
+      <div>
+        <p>Logged in</p>
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
             value={username}
             onChange={handleUsernameChange}
+            placeholder="Enter your username"
+            required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={handlePasswordChange}
+            placeholder="Enter your password"
+            required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">Login</button>
       </form>
     </div>
   );
