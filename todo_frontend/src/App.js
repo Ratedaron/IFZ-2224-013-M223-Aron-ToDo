@@ -8,8 +8,12 @@ export /*default*/ function App() {
   const numberArray = [];
 
   function fetchTasks() {
-
-    fetch('http://localhost:8080/getTasks')
+    const token = JSON.parse(localStorage.getItem("user")).accessToken; // Token lesen
+    fetch('http://localhost:8080/getTasks', {
+      method: 'GET',
+      headers:  {"Authorization": `Bearer ${token}`, // hier wird der Token übergeben
+      "mode":"cors", }})
+      
       .then(response => {
         if (!response.ok) {
           throw new Error('failed to fetch tasks');
@@ -43,8 +47,17 @@ export /*default*/ function App() {
     fetchTasksCallback();
   }, [fetchTasksCallback]);
 
-  const taskName = 'OOOOOOOOOOOOOO';
+  //const taskName = 'OOOOOOOOOOOOOO';
   const taskDescription = 'testTaskdes23';
+  const [taskName, setTaskName] = useState({});
+
+
+
+
+
+
+
+
 
   function addTask() {
     if (taskName !== null && taskName !== '' && taskDescription !== '') {
@@ -175,12 +188,12 @@ export /*default*/ function App() {
 
         <form >
           <label for="test"  >testfield:  </label>
-          <input type="text" id="test" name="testfield" /><br /><br />
+          <input type="text" value={taskName.taskName} id="test" name="testfield" /><br /><br />
 
           <input type="submit" value="Submit" />
         </form>
 
-        
+
         <div className='wholeList'>
           {tasks.map((task, index) => (
             <div className='inLine'>

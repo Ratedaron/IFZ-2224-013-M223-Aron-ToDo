@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import Layout from './pages/Layout';
 import MyTesting from './pages/MyTesting';
 import Home from './pages/Home';
+import LoginPage from './pages/LoginPage';
 
 
 export default function App2() {
@@ -19,6 +20,7 @@ export default function App2() {
           <Route path='tasks' element={<App />} />
           <Route path="about" element={<About />} />
           <Route path="myTesting" element={<MyTesting />} />
+          <Route path="login" element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
