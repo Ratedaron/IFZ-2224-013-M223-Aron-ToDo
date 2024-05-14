@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
-export /*default*/ function App() {
 
-  useEffect(() => { //does some wierd shit lol
-    fetchTasks();
-  }, []); // This empty dependency array ensures the effect runs only once when the component mounts
+
+export /*default*/ function App() {
 
   const numberArray = [];
 
@@ -36,6 +34,14 @@ export /*default*/ function App() {
         console.error('Fetch error: ', error);
       })
   }
+
+  const fetchTasksCallback = useCallback(() => {
+    fetchTasks(setTasks);
+  }, []);
+
+  useEffect(() => {
+    fetchTasksCallback();
+  }, [fetchTasksCallback]);
 
   const taskName = 'OOOOOOOOOOOOOO';
   const taskDescription = 'testTaskdes23';
@@ -73,9 +79,6 @@ export /*default*/ function App() {
           console.error('Add task error: ', error);
         });
     }
-  }
-  function testIndex(taskid) {
-    return numberArray.findIndex(item => item.taskid === taskid);
   }
 
   function delTask(index) {
@@ -142,23 +145,55 @@ export /*default*/ function App() {
   }
   const [tasks, setTasks] = useState([])
 
+  const [clicked, setClicked] = useState(false);
+  const [important, setImportant] = useState(false);
+
+  const handleMouseDown = () => {
+    setClicked(true);
+  };
+
+  const handleMouseUp = () => {
+    setClicked(false);
+  };
+
+  const handleDoubleClick = () => {
+    setImportant(true);
+  };
+
   return (
-    <div className='alsoBlue'>
+
+    <div className='biggerBox'>
       <div className='margin'>
+
+
 
         <div id='container'>
           <h1 id='todoh1'>ToDo List</h1>
           <button id='addButton' onClick={addTask}>+</button>
         </ div>
 
+
+        <form >
+          <label for="test"  >testfield:  </label>
+          <input type="text" id="test" name="testfield" /><br /><br />
+
+          <input type="submit" value="Submit" />
+        </form>
+
+        
         <div className='wholeList'>
           {tasks.map((task, index) => (
             <div className='inLine'>
               <ul>
                 <div key={task.taskid} className="buttonList">
-                  <button className='todobutton'><strong>
-                    {index + 1} | TODO: {task.taskName}
-                  </strong></button>
+                  <button
+                    className={`todobutton ${clicked ? 'black-text' : ''} ${important ? 'important' : ''}`}
+                    onClick={handleDoubleClick}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                  ><strong>
+                      {index + 1} | TODO: {task.taskName}
+                    </strong></button>
                   <div class="buttons">
                     <button id='editButton' onClick={() => editTask(task.taskid)}>Edit</button>
                     <button id='delButton' onClick={() => delTask(task.taskid)}>X</button>
