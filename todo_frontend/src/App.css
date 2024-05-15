@@ -135,6 +135,7 @@ ul {
   margin-right: auto;
   margin-bottom: 0px;
   width: 50%;
+  width: min(1000px);
   border: 10px solid #333;
 border-radius: 20px; 
 box-shadow: 0 32px 64px 0 rgba(226, 45, 45, 0.2); 

@@ -7,44 +7,52 @@ export /*default*/ function App() {
 
   const numberArray = [];
 
+  // this is the fetch function for getting tasks from db, if you want to know what happends when this link gets called go to the Home controller in the backend
   function fetchTasks() {
+    //we save the saved token once again here in this function, so that we can use it to send it
+
     const token = JSON.parse(localStorage.getItem("user")).accessToken; // Token lesen
+    //the acuall fetch  with its body to get all tasks, no parameters needed fortunatly
     fetch('http://localhost:8080/getTasks', {
       method: 'GET',
       headers: {
-        "Authorization": `Bearer ${token}`, // hier wird der Token übergeben
+        "Authorization": `Bearer ${token}`, // hier wird der Token übergeben <- yes indeed
         "mode": "cors",
       }
     })
-
+      //this is cool, we define what to do after the fetch with "then"
+      // we can also use the data the fetch returns lol
       .then(response => {
         if (!response.ok) {
           throw new Error('failed to fetch tasks');
         }
         return response.json();
       })
+      //the second thing we do after the fetch
       .then(data => {
-        setTasks(data);
+        setTasks(data); // we put all the data we got as a respone into a List
 
         // Clear existing numberArray
         numberArray.splice(0, numberArray.length);
         let currentLength = 1;
         // Populate numberArray with task IDs
+        //we carefullly put all the data in array here
+        // I did this so that the tasks are numberd
         data.forEach(task => {
           numberArray.push({ taskid: task.taskid, taskName: task.taskName, taskDescription: task.taskDescription, length: currentLength });
           currentLength++; // Increment after each element handled
         });
-
-        console.log(numberArray);
+        // i did this output for testing
+      //  console.log(numberArray);
       })
       .catch(error => {
         console.error('Fetch error: ', error);
       })
   }
-
+  //idk what this does
   const fetchTasksCallback = useCallback(() => {
     fetchTasks(setTasks);
-  }, []);
+  }, [fetchTasks]);
 
   useEffect(() => {
     fetchTasksCallback();
@@ -52,15 +60,18 @@ export /*default*/ function App() {
 
   //const taskName = 'OOOOOOOOOOOOOO';
   const taskDescription = 'testTaskdes23';
-  const [taskName, setTaskName] = useState({});
+  const [taskName, setTaskName] = useState('');
 
   function addTask() {
+    const token = JSON.parse(localStorage.getItem("user")).accessToken;
     if (taskName !== null && taskName !== '' && taskDescription !== '') {
       const url = `http://localhost:8080/addTask?taskName=${encodeURIComponent(taskName)}&taskDescription=${encodeURIComponent(taskDescription)}`;
 
       fetch(url, {
         method: 'POST',
         headers: {
+          "Authorization": `Bearer ${token}`, // hier wird der Token übergeben <- yes indeed
+          "mode": "cors",
         },
         body: JSON.stringify({ taskName: taskName, taskDescription: taskDescription })
       })
@@ -69,6 +80,7 @@ export /*default*/ function App() {
             throw new Error('Failed to add task');
           }
           //getting the updated db again 
+          //without the array
           fetch('http://localhost:8080/getTasks')
             .then(response => {
               if (!response.ok) {
@@ -90,10 +102,14 @@ export /*default*/ function App() {
   }
 
   function delTask(index) {
+    const token = JSON.parse(localStorage.getItem("user")).accessToken;
     const url = `http://localhost:8080/delTask/${encodeURIComponent(index)}`;
     fetch(url, {
       method: 'DELETE',
-      headers: {}
+      headers: {
+        "Authorization": `Bearer ${token}`, // hier wird der Token übergeben <- yes indeed
+          "mode": "cors"
+      }
     })
       .then(response => {
         if (!response.ok) {
@@ -107,6 +123,7 @@ export /*default*/ function App() {
   }
 
   function editTask(index) {
+    const token = JSON.parse(localStorage.getItem("user")).accessToken;
     if (index !== null && index !== '') {
       const newTaskName = prompt('enter new Task name for task ' + index);
 
@@ -119,7 +136,9 @@ export /*default*/ function App() {
       fetch(url, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`, // hier wird der Token übergeben <- yes indeed
+          "mode": "cors"
         },
         body: JSON.stringify(requestBody)
       })
@@ -163,14 +182,22 @@ export /*default*/ function App() {
 
         <div id='container'>
           <h1 id='todoh1'>ToDo List</h1>
-          <button id='addButton' onClick={addTask}>+</button>
         </ div>
 
 
-        <form >
-          <label for="test"  >testfield:  </label>
-          <input type="text" value={taskName.taskName} id="test" name="testfield" /><br /><br />
-
+        <form onSubmit={(event) => {
+          event.preventDefault(); // Prevent the default form submission behavior
+          addTask(); // Call addTask function with the content of the form field as parameter
+     console.log(taskName);
+     }}>
+          <label htmlFor="test">testfield:</label>
+          <input
+            type="text"
+            value={taskName}
+            id="test"
+            name="testfield"
+            onChange={(e) => setTaskName(e.target.value)} // Update taskName state with just the string value
+            /><br /><br />
           <input type="submit" value="Submit" />
         </form>
 
