@@ -133,6 +133,7 @@ ul {
   background-color: rgb(255, 255, 255);
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 0px;
   width: 50%;
   border: 10px solid #333;
 border-radius: 20px; 

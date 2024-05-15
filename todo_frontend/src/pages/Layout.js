@@ -2,11 +2,6 @@ import { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import './Layout.css';
 
-function Logout() {
-    localStorage.removeItem('user');
-    localStorage.setItem('status', 'notLoggedIn');
-}
-
 const Layout = () => {
     const [status, setStatus] = useState(localStorage.getItem('status'));
 
@@ -18,6 +13,12 @@ const Layout = () => {
 
         return () => clearInterval(interval);
     }, []);
+
+    const Logout = () => {
+        localStorage.removeItem('user');
+        localStorage.setItem('status', 'notLoggedIn');
+        setStatus('notLoggedIn'); // Update the status state
+    }
 
     return (
         <>
@@ -34,8 +35,13 @@ const Layout = () => {
 
                 <Link to="/" onClick={Logout}>Logout</Link>
                 <div id='topnav-right'>
-                    <Link to="/about">About</Link>
-                    <Link to="/myTesting">What I did in testing</Link>
+                    {/* Render About and MyTesting links only if the user is logged in */}
+                    {status !== 'notLoggedIn' && (
+                        <>
+                            <Link to="/about">About</Link>
+                            <Link to="/myTesting">What I did in testing</Link>
+                        </>
+                    )}
                 </div>
             </nav>
 

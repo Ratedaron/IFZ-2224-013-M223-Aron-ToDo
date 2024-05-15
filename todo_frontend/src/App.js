@@ -11,9 +11,12 @@ export /*default*/ function App() {
     const token = JSON.parse(localStorage.getItem("user")).accessToken; // Token lesen
     fetch('http://localhost:8080/getTasks', {
       method: 'GET',
-      headers:  {"Authorization": `Bearer ${token}`, // hier wird der Token übergeben
-      "mode":"cors", }})
-      
+      headers: {
+        "Authorization": `Bearer ${token}`, // hier wird der Token übergeben
+        "mode": "cors",
+      }
+    })
+
       .then(response => {
         if (!response.ok) {
           throw new Error('failed to fetch tasks');
@@ -50,14 +53,6 @@ export /*default*/ function App() {
   //const taskName = 'OOOOOOOOOOOOOO';
   const taskDescription = 'testTaskdes23';
   const [taskName, setTaskName] = useState({});
-
-
-
-
-
-
-
-
 
   function addTask() {
     if (taskName !== null && taskName !== '' && taskDescription !== '') {
@@ -104,25 +99,11 @@ export /*default*/ function App() {
         if (!response.ok) {
           throw new Error('Failed to delete task');
         }
-
         //  Optional Actions - Refresh the task list after deletion
-        fetch('http://localhost:8080/getTasks')
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('failed to fetch tasks');
-            }
-            return response.json();
-          })
-          .then(data => {
-            setTasks(data);
-          })
-          .catch(error => {
-            console.error('Fetch error: ', error);
-          })
+        setTasks(tasks.filter(task => index !== task.taskid));
+
+        fetchTasks();
       })
-      .catch(error => {
-        console.error('Error deleting task:', error);
-      });
   }
 
   function editTask(index) {
