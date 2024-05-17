@@ -62,7 +62,9 @@ export /*default*/ function App() {
   const taskDescription = 'testTaskdes23';
   const [taskName, setTaskName] = useState('');
 
+// ze add task function
   function addTask() {
+    //gettinh the token for validation bacouse if not, it dont work
     const token = JSON.parse(localStorage.getItem("user")).accessToken;
     if (taskName !== null && taskName !== '' && taskDescription !== '') {
       const url = `http://localhost:8080/addTask?taskName=${encodeURIComponent(taskName)}&taskDescription=${encodeURIComponent(taskDescription)}`;
