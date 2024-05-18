@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 import './Layout.css';
 
 const Layout = () => {
     const [status, setStatus] = useState(localStorage.getItem('status'));
+    const location = useLocation();
 
     useEffect(() => {
+        // Set status to 'notLoggedIn' if the current path is '/'
+        if (location.pathname === "/") {
+            localStorage.setItem('status', 'notLoggedIn');
+            setStatus('notLoggedIn');
+        }
+
         const interval = setInterval(() => {
             const newStatus = localStorage.getItem('status');
             setStatus(newStatus);
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [location.pathname]);
 
     const Logout = () => {
         localStorage.removeItem('user');

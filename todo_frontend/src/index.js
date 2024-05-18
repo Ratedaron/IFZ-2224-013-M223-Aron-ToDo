@@ -12,6 +12,9 @@ import LoginPage from './pages/LoginPage';
 
 
 export default function App2() {
+
+
+  
   return (
     <BrowserRouter>
       <Routes>
