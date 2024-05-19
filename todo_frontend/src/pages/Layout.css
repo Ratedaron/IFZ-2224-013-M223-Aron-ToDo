@@ -1,74 +1,4 @@
-/* Add these styles to your Layout.css file */
-
-.formLabel {
-  display: inline-block;
-  width: 150px; /* Adjust as necessary */
-  font-weight: bold;
-}
-
-.fancyForm {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  margin: 20px auto;
-  background-color: #f9f9f9;
-}
-
-.createUser {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.createUser:hover {
-  background-color: #45a049;
-}
-
-.closeButton {
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  float: right;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select {
-  width: calc(100% - 160px); /* Adjust to match the label width */
-  padding: 5px;
-  margin: 5px 0 10px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover {
-  background-color: #45a049;
-}
-
 .centeredContainer {
-  text-align: center;
-}
-
-#messageForUser {
   text-align: center;
 }
 
@@ -126,7 +56,7 @@ input[type="submit"]:hover {
 }
 
 .login-container {
-  width: 300px;
+  max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -147,9 +77,9 @@ input[type="submit"]:hover {
 }
 
 .form-group input {
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .login-button {
@@ -157,10 +87,88 @@ input[type="submit"]:hover {
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .login-button:hover {
   background-color: #0056b3;
+}
+
+.form-container {
+  position: relative; 
+  width: fit-content;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-container h1 {
+  text-align: center;
+}
+
+.form-container h3 {
+  text-align: center;
+}
+
+.form-container button.create-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-container button.create-btn:hover {
+  background-color: #0056b3;
+}
+
+.form-container form div {
+  margin-bottom: 10px;
+}
+
+.form-container button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.form-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px; /* Add margin to the bottom */
+}
+
+.form-container input,
+.form-container select {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 10px; /* Adjust top positioning */
+  right: 10px; /* Position to the right */
+  cursor: pointer;
+  font-size: 24px;
+  color: #888;
+}
+
+#messageForUser {
+  text-align: center;
 }
