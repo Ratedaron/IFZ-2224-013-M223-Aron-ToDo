@@ -5,6 +5,7 @@ export function App() {
   const numberArray = [];
   const [showForm, setShowForm] = useState(false); // State to track form visibility
 
+  // Function to fetch tasks from the server
   function fetchTasks() {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -54,14 +55,15 @@ export function App() {
     fetchTasksCallback();
   }, [fetchTasksCallback]);
 
+  // useStates for task fields and tasks list
   const [taskDescription, setTaskDescription] = useState('');
   const [taskName, setTaskName] = useState('');
   const [tasks, setTasks] = useState([]);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
 
-// ze add task function
+  // Function to add a new task
   function addTask() {
-    //gettinh the token for validation bacouse if not, it dont work
+    // Getting the token for validation
     const token = JSON.parse(localStorage.getItem("user")).accessToken;
     if (taskName && taskDescription) {
       const url = `http://localhost:8080/addTask?taskName=${encodeURIComponent(taskName)}&taskDescription=${encodeURIComponent(taskDescription)}`;
@@ -86,6 +88,7 @@ export function App() {
     }
   }
 
+  // Function to delete a task
   function delTask(index) {
     const token = JSON.parse(localStorage.getItem("user")).accessToken;
     const url = `http://localhost:8080/delTask/${encodeURIComponent(index)}`;
@@ -108,6 +111,7 @@ export function App() {
       });
   }
 
+  // Function to edit a task
   function editTask(index) {
     const token = JSON.parse(localStorage.getItem("user")).accessToken;
     if (index !== null && index !== '') {
@@ -142,6 +146,7 @@ export function App() {
     }
   }
 
+  // Function to toggle task description visibility
   const toggleExpandTask = (taskid) => {
     setExpandedTaskId(expandedTaskId === taskid ? null : taskid);
   };
@@ -158,7 +163,7 @@ export function App() {
           <button className="addTaskButton" onClick={() => setShowForm(true)}>Add A Task</button>
         )}
 
-        {/* Form */}
+        {/* Form for adding a task */}
         {showForm && (
           <div className='fancyForm'>
             <button className="closeButton" onClick={() => setShowForm(false)}>X</button>
