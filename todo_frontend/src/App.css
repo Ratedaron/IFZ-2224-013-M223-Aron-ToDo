@@ -145,7 +145,7 @@ ul {
   background-color: rgb(255, 255, 255);
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0px;
+  margin-bottom: 59px;
   width: 50%;
   width: min(75%);
   border: 10px solid #333;
@@ -385,6 +385,16 @@ button:active {
 
 .addTaskButton:not(:disabled):active {
   transform: translateY(.125rem);
+}
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+ 
 }
 
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-//import wiss.todoApp.exception.ResourceNotFoundException;
+// imports lol
 import wiss.todoApp.models.Task;
 import wiss.todoApp.repository.TaskRepository;
 import wiss.todoApp.security.services.TaskService;
@@ -28,6 +26,7 @@ public class HomeController {
     @Autowired
     private TaskService taskService;
 
+    // get all tasks mapping , its acually really ez I learned it all in a day
     @GetMapping("/getTasks")
     public ResponseEntity<List<Task>> getAllTasks() {
         Iterable<Task> taskItems = taskRepository.findAll();
@@ -44,6 +43,7 @@ public class HomeController {
         task1.setTaskDescription(taskDescription);
         taskRepository.save(task1); // defined in CrudRepository-Interface
 
+        //i wanted to display multible mesaages so i made an array lol
         ArrayList<String> msg = new ArrayList<>();
         msg.add(Integer.toString(task1.getTaskid()));
         msg.add(task1.getTaskName());
@@ -51,13 +51,13 @@ public class HomeController {
 
         return ResponseEntity.ok(msg);
     }
-
+ // delete here
     @DeleteMapping("/delTask/{id}")
 
     public ResponseEntity<String> deleteTaskById(@PathVariable int id) {
         taskService.deleteTask(id);
         return ResponseEntity.ok("Task " + id + " deleted");
-        // if not exists pleses make a diffrent massage appear
+        // if not exists pleses make a diffrent massage appear <- i forgot why i put this here
     }
 
     // build update employee REST API

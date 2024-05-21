@@ -3,36 +3,30 @@ package wiss.todoApp.models;
 import java.util.HashSet;
 import java.util.Set;
 
-
-/**
- * <dependency>
-    <groupId>jakarta.validation</groupId>
-    <artifactId>jakarta.validation-api</artifactId>
-    <version>3.0.0</version> <!-- Adjust version as needed -->
-</dependency>
-
-This dependency is importand if ur useing jakarta :(
- */
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-
+// model für user und culums werden erstellt von java in the db
 @Entity
 @Table(name = "users", 
     uniqueConstraints = { 
-      @UniqueConstraint(columnNames = "username")
+      @UniqueConstraint(columnNames = "username"),
+      @UniqueConstraint(columnNames = "email") 
     })
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Integer id;
 
   @NotBlank
   @Size(max = 20)
   private String username;
 
+  @NotBlank
+  @Size(max = 50)
+  @Email
+  private String email;
 
   @NotBlank
   @Size(max = 120)
@@ -47,43 +41,49 @@ public class User {
   public User() {
   }
 
-  public User(String username, String password) {
+  public User(String username, String email, String password) {
     this.username = username;
+    this.email = email;
     this.password = password;
   }
-  // getters and setters
-public int getId() {
+
+  public Integer getId() {
     return id;
-}
+  }
 
-public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
-}
+  }
 
-public String getUsername() {
+  public String getUsername() {
     return username;
-}
+  }
 
-public void setUsername(String username) {
+  public void setUsername(String username) {
     this.username = username;
-}
+  }
 
-public String getPassword() {
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getPassword() {
     return password;
-}
+  }
 
-public void setPassword(String password) {
+  public void setPassword(String password) {
     this.password = password;
-}
+  }
 
-public Set<Role> getRoles() {
+  public Set<Role> getRoles() {
     return roles;
-}
+  }
 
-public void setRoles(Set<Role> roles) {
+  public void setRoles(Set<Role> roles) {
     this.roles = roles;
-}
-
-
-  
+  }
 }

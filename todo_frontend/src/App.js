@@ -220,7 +220,17 @@ export function App() {
             </div>
           ))}
         </div>
+
+        
+
       </div>
+<footer className="footer">
+                <div>
+                    {/* Hier kannst du den Inhalt deines Footers einfügen */}
+                    &copy; {new Date().getFullYear()} Todo App. Alle Rechte vorbehalten.
+                </div>
+            </footer>
+
     </div>
   );
 }

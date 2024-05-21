@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+// most importand file in backend!!!!
 
-@RestController // new item
 @SpringBootApplication
 @Import(CorsConfig.class)
 public class TodoApplication {
@@ -24,6 +23,7 @@ public class TodoApplication {
 	}
 
 	// from here all new items
+	// for memory
 	@GetMapping("/")
 	public String index() {
 		return "Spring Boot Category REST API!";

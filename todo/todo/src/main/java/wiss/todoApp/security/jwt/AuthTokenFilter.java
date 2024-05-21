@@ -19,47 +19,48 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import wiss.todoApp.security.services.UserDetailsServiceImpl;
 
-public class AuthTokenFilter extends OncePerRequestFilter {
-  @Autowired
-  private JwtUtils jwtUtils;
+public class AuthTokenFilter extends OncePerRequestFilter { // Filter that executes once per request to handle JWT authentication.
 
   @Autowired
-  private UserDetailsServiceImpl userDetailsService;
+  private JwtUtils jwtUtils; // Utility class for JWT operations.
 
-  private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+  @Autowired
+  private UserDetailsServiceImpl userDetailsService; // Service to load user-specific data.
+
+  private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class); // Logger for logging information and errors.
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
     try {
-      String jwt = parseJwt(request);
-      if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-        String username = jwtUtils.getUserNameFromJwtToken(jwt);
+      String jwt = parseJwt(request); // Extracts the JWT from the request.
+      if (jwt != null && jwtUtils.validateJwtToken(jwt)) { // Validates the JWT.
+        String username = jwtUtils.getUserNameFromJwtToken(jwt); // Retrieves the username from the JWT.
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username); // Loads the user details using the username.
         UsernamePasswordAuthenticationToken authentication =
             new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,
-                userDetails.getAuthorities());
-        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                userDetails.getAuthorities()); // Creates an authentication token.
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // Sets additional details.
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication); // Sets the authentication in the security context.
       }
     } catch (Exception e) {
-      logger.error("Cannot set user authentication: {}", e);
+      logger.error("Cannot set user authentication: {}", e); // Logs any errors that occur during the authentication process.
     }
 
-    filterChain.doFilter(request, response);
+    filterChain.doFilter(request, response); // Continues the filter chain.
   }
 
   private String parseJwt(HttpServletRequest request) {
-    String headerAuth = request.getHeader("Authorization");
+    String headerAuth = request.getHeader("Authorization"); // Gets the Authorization header from the request.
 
-    if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-      return headerAuth.substring(7);
+    if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) { // Checks if the header contains a Bearer token.
+      return headerAuth.substring(7); // Extracts the JWT token from the header.
     }
 
-    return null;
+    return null; // Returns null if no valid JWT is found.
   }
 }
