@@ -3,7 +3,7 @@
 ### This is a todo-App developed with java Spring-Boot, ReactJs and mySQL 
 It also implements Token based authentication
 
-I created an SQL script for you to get started 
+I created an SQL script for you in the Doku to get started 
 
 
 Great it was indeed ;)
