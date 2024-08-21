@@ -4,7 +4,7 @@
 It also implements Token based authentication
 
 I created an SQL script for you in the Doku to get started 
-And pls change the prob file
+And pls change the prop file
 
 
 Great it was indeed ;)
